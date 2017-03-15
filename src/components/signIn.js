@@ -1,7 +1,7 @@
-import React, { PropTypes, Component } from 'react';
-import {render} from 'react-dom';
+import React from 'react';
 
-class SignIn extends Component {
+
+class SignIn extends React.Component {
   render () {
     return (
           <form>

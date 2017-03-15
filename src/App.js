@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import logo from './logo.svg';
 import { Route, Link } from 'react-router-dom';
 import SignIn from './components/signIn';
 import SignUp from './components/signUp';
 import './App.css';
 
-class App extends Component {
+class App extends React.Component {
   render() {
     return (
        <div className="container">
