@@ -1,0 +1,56 @@
+.container {
+  width: 100%;
+}
+
+.col-4 {
+  width: 25%;
+}
+
+.authPagePadding, #left, #right {
+  padding-top: 5%;
+  padding-right: 5%;
+  padding-bottom: 5%;
+  padding-left: 5%;
+  height: 150vh;
+}
+
+#left {
+  background: #E94448;
+}
+
+#right {
+  background: #152540;
+}
+
+h1 {
+  color: #ffffff;
+}
+
+#book {
+  color: #ffffff;
+}
+
+#button {
+  -webkit-border-radius: 15px;
+  background: #E94448;
+}
+
+#button1 {
+  -webkit-border-radius: 15px 0px 0px 15px;
+  background: #234476;
+}
+
+#button2 {
+  -webkit-border-radius: 0px 15px 15px 0px;
+  background: #234476;
+}
+
+#button1:hover {
+  background-color: #E94448;
+  color: #ffffff;
+}
+
+#button2:hover {
+  background-color: #E94448;
+  color: #ffffff;
+}
