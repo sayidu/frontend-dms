@@ -31,57 +31,59 @@ class Document extends React.Component {
 
   handleEditorChange = (e) => {
     if(e.target.id === "react-tinymce-0") {
-       this.setState({title: e.target.getContent()});
+       this.setState({title: e.target.getContent({format: 'text'})});
     } else {
-       this.setState({content: e.target.getContent()});
+       this.setState({content: e.target.getContent({format: 'text'})});
     }
    }
 
   handleSubmit = (e) => {
-    event.preventDefault();
+    e.preventDefault();
     this.props.saveDoc(this.state);
-    console.log('Doc was submitted:', e.content);
   }
 
   render () {
     return (
-        <form onSubmit={this.handleSubmit}>
+       <form onSubmit={this.handleSubmit}>
               <div className="input-field col s10">
                 <div style={STYLES.container}>
+                <h1>Title:
                 <TinyMCE
-                      content= "<p><b>  TITLE:  </b></p>"
+                      content= ""
                       config={{
-                        selector:'#text',
-                        height: 50,
-                        width: 1000,
+                        height: 30,
+                        width: 100,
                         inline: true,
                         menubar: false
                       }}
                       onChange={this.handleEditorChange}
                   />
+                  </h1>
                   <TinyMCE
+                      selector= "container"
                       content="<p>This is the initial content of the editor</p>"
                       menubar ="file edit insert view format table tools"
                       config={{
-                        selector:'.text',
+                        theme: "modern",
                         height: 500,
                         width: 1000,
                         menubar: true,
-                        plugins: 'link save',
+                        // plugins: 'save',
+                        // save_enablewhendirty: true,
                         toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code | save',
-                        save_enablewhendirty: true,
-                        save_onsavecallback: function () {
-                          console.log('Saved');
-                        }
                       }}
-                     // onSaveContent={this.handleSubmit}
+
                       onChange={this.handleEditorChange}
                   />
                 </div>
+                  <p className="pull-right">
+                      <input type="submit" value="Save" className="waves-effect waves-light btn" />
+                 </p>
               </div>
-         </form>
+          </form>
     );
   }
 }
 
-export default Document;
+
+export default connect(null, { saveDoc })(Document);

@@ -1,6 +1,13 @@
 import axios from 'axios';
 
-export function SAVE_A_DOC(doc) {
+
+const AUTH_TOKEN = localStorage.getItem('loginToken');
+
+const config = {
+  headers: {'Authorization': AUTH_TOKEN}
+};
+
+export function saveADoc(doc) {
   return {
     type:'SAVE_NEW_DOC',
     doc
@@ -9,10 +16,11 @@ export function SAVE_A_DOC(doc) {
 
 export function saveDoc(doc) {
   return dispatch => {
-     //instance.defaults.headers.common['Authorization'] = AUTH_TOKEN;
-     return axios.post('/documents', doc)
+    console.log("Document dispatched", doc, config);
+     return axios.post('/documents', doc, config)
       .then((res) => {
-        console.log('document created');
+        dispatch(saveADoc(doc));
+        console.log('db document created');
       })
   }
 }

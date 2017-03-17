@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { loginUser } from '../actions/signIn';
 import { Redirect } from 'react-router-dom';
 
-let view;
+let docView;
 
 class SignIn extends React.Component {
   constructor(props){
@@ -26,9 +26,10 @@ class SignIn extends React.Component {
     });
   }
   render () {
-     if(this.state.done === true) {
-         view=  <Redirect to="/document"/>
-      }
+    if(this.state.done === true) {
+        docView = <Redirect to="/document"/>
+    }
+
     return (
           <form onSubmit={this.handleSubmit}>
               <div className="input-field col s10">
@@ -41,7 +42,7 @@ class SignIn extends React.Component {
               <p>
                   <input type="submit" value="Sign In" className="waves-effect waves-light btn" />
               </p>
-                       {view}
+              {docView}
          </form>
      );
   }
