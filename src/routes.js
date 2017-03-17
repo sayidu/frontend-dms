@@ -1,11 +1,18 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
-import SignIn from './components/signIn';
+import Home from './components/home';
 import SignUp from './components/signUp';
+import SignIn from './components/signIn';
 
-export default (
-  <Route>
-    <Route path="/" component={SignUp} />
-    <Route path="/signIn"  component={SignIn} />
-  </Route>
-)
+let routes = [
+    {
+      path: '/',
+      component: Home
+    },
+    {
+      path: '/'
+      component
+    },
+    {
+
+    }
+];
+

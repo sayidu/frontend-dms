@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { createUser } from '../actions/signUp';
 
 
@@ -34,20 +33,20 @@ class SignUp extends React.Component {
     return (
         <form onSubmit={this.handleSubmit}>
               <div className="input-field col s10">
-                   <input placeholder="User Name" name="username" onChange={this.handleChange}  type="text" />
+                   <input placeholder="User Name" name="username" required onChange={this.handleChange}  type="text" />
               </div>
               <div className="input-field col s10">
-                   <input placeholder="First Name"  onChange={this.handleChange}   name="firstName" type="text" className="validate"/>
+                   <input placeholder="First Name"  onChange={this.handleChange}  required  name="firstName" type="text" className="validate"/>
               </div>
               <div className="input-field col s10">
-                   <input placeholder="Last Name" onChange={this.handleChange}  name="lastName" type="text" className="validate"/>
+                   <input placeholder="Last Name" onChange={this.handleChange} required  name="lastName" type="text" className="validate"/>
               </div>
               <div className="input-field col s10">
-                   <input placeholder="Email" name="email"  onChange={this.handleChange}  type="email" className="validate"/>
+                   <input placeholder="Email" name="email"  onChange={this.handleChange} required   type="email" className="validate"/>
               </div>
               <div className="input-field col s10">
                    <i className="material-icons prefix">lock</i>
-                   <input placeholder="Password" name="password" onChange={this.handleChange} type="password" className="validate"/>
+                   <input placeholder="Password" name="password" onChange={this.handleChange}  required type="password" className="validate"/>
                   <p>
                       <input type="submit" value="Sign Up" className="waves-effect waves-light btn" />
                  </p>
