@@ -12,7 +12,7 @@ export function createUser(userData) {
   return dispatch => {
     return axios.post('/users', userData)
       .then((res) => {
-        localStorage.setItem('token', res.data.token);
+        localStorage.setItem('signUpToken', res.data.token);
         dispatch(newUser(userData));
       })
   }

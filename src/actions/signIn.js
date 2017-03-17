@@ -11,8 +11,7 @@ export function loginUser(userData){
   return dispatch => {
     return axios.post('/users/login', userData)
         .then((res) => {
-          console.log("Response", res);
-        debugger;
+            localStorage.setItem('loginToken', res.data.token);
             dispatch(verifyUser(userData));
         })
   }

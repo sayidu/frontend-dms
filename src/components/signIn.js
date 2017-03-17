@@ -1,14 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { loginUser } from '../actions/signIn';
+import { Redirect } from 'react-router-dom';
 
+let view;
 
 class SignIn extends React.Component {
   constructor(props){
       super(props);
       this.state= {
           email: '',
-          password: ''
+          password: '',
+          done: false
       }
   }
 
@@ -18,9 +21,14 @@ class SignIn extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.loginUser(this.state);
+    this.props.loginUser(this.state).then(() => {
+        this.setState({done: true});
+    });
   }
   render () {
+     if(this.state.done === true) {
+         view=  <Redirect to="/document"/>
+      }
     return (
           <form onSubmit={this.handleSubmit}>
               <div className="input-field col s10">
@@ -33,6 +41,7 @@ class SignIn extends React.Component {
               <p>
                   <input type="submit" value="Sign In" className="waves-effect waves-light btn" />
               </p>
+                       {view}
          </form>
      );
   }

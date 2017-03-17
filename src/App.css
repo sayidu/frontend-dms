@@ -6,6 +6,10 @@
   width: 25%;
 }
 
+body {
+    background-color: #E94448;
+}
+
 .authPagePadding, #left, #right {
   padding-top: 5%;
   padding-right: 5%;

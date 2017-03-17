@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import TinyMCE from 'react-tinymce';
-// import { createUser } from '../actions/document';
+import { saveDoc } from '../actions/document';
+
 const STYLES = {
   container: {
     fontFamily: 'Helvetica Neue, sans-serif',
@@ -21,16 +22,25 @@ class Document extends React.Component {
   constructor(props) {
     super(props);
     this.state =  {
+      title: '',
+      content: '',
+      access: 'public',
+      ownerId: 1
     }
   }
 
   handleEditorChange = (e) => {
-    console.log('Content was updated:', e.target.getContent());
-  }
+    if(e.target.id === "react-tinymce-0") {
+       this.setState({title: e.target.getContent()});
+    } else {
+       this.setState({content: e.target.getContent()});
+    }
+   }
 
-  handleSubmit = (event) => {
+  handleSubmit = (e) => {
     event.preventDefault();
-    this.props.createUser(this.state);
+    this.props.saveDoc(this.state);
+    console.log('Doc was submitted:', e.content);
   }
 
   render () {
@@ -38,21 +48,36 @@ class Document extends React.Component {
         <form onSubmit={this.handleSubmit}>
               <div className="input-field col s10">
                 <div style={STYLES.container}>
-                  <TinyMCE
-                      content="<p>This is the initial content of the editor</p>"
-                      content_style="div {margin: 10px; border: 5px solid red; padding: 3px}"
+                <TinyMCE
+                      content= "<p><b>  TITLE:  </b></p>"
                       config={{
-                        height: 900,
-                        menubar: false,
-                        plugins: 'link image code',
-                        toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
+                        selector:'#text',
+                        height: 50,
+                        width: 1000,
+                        inline: true,
+                        menubar: false
                       }}
                       onChange={this.handleEditorChange}
                   />
+                  <TinyMCE
+                      content="<p>This is the initial content of the editor</p>"
+                      menubar ="file edit insert view format table tools"
+                      config={{
+                        selector:'.text',
+                        height: 500,
+                        width: 1000,
+                        menubar: true,
+                        plugins: 'link save',
+                        toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code | save',
+                        save_enablewhendirty: true,
+                        save_onsavecallback: function () {
+                          console.log('Saved');
+                        }
+                      }}
+                     // onSaveContent={this.handleSubmit}
+                      onChange={this.handleEditorChange}
+                  />
                 </div>
-                  <p>
-                      <input type="submit" value="Save" className="waves-effect waves-light btn" />
-                 </p>
               </div>
          </form>
     );
