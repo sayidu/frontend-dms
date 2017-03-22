@@ -6,27 +6,22 @@
   width: 25%;
 }
 
-body {
-    background-color: #E94448;
-}
-
 .authPagePadding, #left, #right {
   padding-top: 5%;
   padding-right: 5%;
   padding-bottom: 5%;
   padding-left: 5%;
-  height: 150vh;
+  color: #ffffff;
+  height: 200vh;
 }
 
 #left {
   background: #E94448;
+  color: #ffffff;
 }
 
 #right {
   background: #152540;
-}
-
-h1 {
   color: #ffffff;
 }
 
@@ -57,4 +52,17 @@ h1 {
 #button2:hover {
   background-color: #E94448;
   color: #ffffff;
+}
+
+#sidebar{
+  background-color: #152540;
+  color: #ffffff;
+  height: 100vh;
+  text-align: center
+}
+
+#mainHeader {
+  -webkit-border-radius: 0px 20px 20px 0px;
+  height: 15vh;
+  background: #152540;
 }

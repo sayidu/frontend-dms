@@ -7,6 +7,7 @@ import axios from "axios";
 import App from './App';
 import thunk from 'redux-thunk';
 import rootReducers from './reducers';
+// import authToken from './utils/setAuthToken';
 import { composeWithDevTools } from 'redux-devtools-extension';
 // import routes from './routes';
 // import './index.css';
@@ -20,6 +21,10 @@ const store = createStore(
    )
 );
 
+if(localStorage.loginToken){
+  axios.defaults.headers.common['Authorization'] = localStorage.loginToken;
+}
+
 ReactDOM.render(
   <Router>
     <Provider store={store}>
@@ -28,5 +33,4 @@ ReactDOM.render(
   </Router>,
   document.getElementById('root')
 );
-
 

@@ -12,6 +12,8 @@ export function loginUser(userData){
     return axios.post('/users/login', userData)
         .then((res) => {
             localStorage.setItem('loginToken', res.data.token);
+            localStorage.setItem('userName', res.data.existingUser);
+            axios.defaults.headers.common['Authorization'] = res.data.token;
             dispatch(verifyUser(userData));
         })
   }

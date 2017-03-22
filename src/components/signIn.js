@@ -25,19 +25,20 @@ class SignIn extends React.Component {
         this.setState({done: true});
     });
   }
+
+
   render () {
     if(this.state.done === true) {
-        docView = <Redirect to="/document"/>
+        docView = <Redirect to="/dashboard"/>
     }
-
     return (
           <form onSubmit={this.handleSubmit}>
               <div className="input-field col s10">
                    <input placeholder="Email" name="email"  onChange={this.handleChange} className="validate" required/>
               </div>
               <div className="input-field col s10">
-                   <i className="material-icons prefix">lock</i>
-                   <input placeholder="Password" name="password" type="password" onChange={this.handleChange} className="validate" required/>
+                <i className="material-icons">lock</i>
+                 <input placeholder="Password" name="password" type="password" onChange={this.handleChange} className="validate" required/>
               </div>
               <p>
                   <input type="submit" value="Sign In" className="waves-effect waves-light btn" />

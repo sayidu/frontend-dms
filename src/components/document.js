@@ -2,21 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import TinyMCE from 'react-tinymce';
 import { saveDoc } from '../actions/document';
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 
-const STYLES = {
-  container: {
-    fontFamily: 'Helvetica Neue, sans-serif',
-    padding: '0 25px'
-  },
-  output: {
-    border: '1px solid #999',
-    borderRadius: 5,
-    fontFamily: 'Courier New, monospace',
-    padding: 10,
-    height: 250,
-    overflow: 'auto'
-  }
-};
+const options = [
+	{ value: 'public', label: 'Public' },
+	{ value: 'private', label: 'Private' },
+  { value: 'role', label: 'Role'}
+];
 
 class Document extends React.Component {
   constructor(props) {
@@ -25,17 +18,21 @@ class Document extends React.Component {
       title: '',
       content: '',
       access: 'public',
-      ownerId: 1
+      ownerId: 0 //Autoassigned via server
     }
   }
 
   handleEditorChange = (e) => {
     if(e.target.id === "react-tinymce-0") {
-       this.setState({title: e.target.getContent({format: 'text'})});
+       this.setState({title: e.target.getContent()});
     } else {
-       this.setState({content: e.target.getContent({format: 'text'})});
+       this.setState({content: e.target.getContent()});
     }
    }
+
+  accessCtrl = (e) => {
+     this.setState({access: e.value});
+  }
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -44,15 +41,21 @@ class Document extends React.Component {
 
   render () {
     return (
-       <form onSubmit={this.handleSubmit}>
-              <div className="input-field col s10">
-                <div style={STYLES.container}>
+      <div className="container">
+       <form className="col s9" onSubmit={this.handleSubmit}>
+        Select Option
+        <Select
+          name="form-field-name"
+          value={this.state.access}
+          options={options}
+          onChange={this.accessCtrl}
+        />
                 <h1>Title:
                 <TinyMCE
                       content= ""
                       config={{
                         height: 30,
-                        width: 100,
+                        width: 50,
                         inline: true,
                         menubar: false
                       }}
@@ -66,21 +69,17 @@ class Document extends React.Component {
                       config={{
                         theme: "modern",
                         height: 500,
-                        width: 1000,
+                        width: 650,
                         menubar: true,
-                        // plugins: 'save',
-                        // save_enablewhendirty: true,
-                        toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code | save',
+                        toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code ',
                       }}
-
                       onChange={this.handleEditorChange}
                   />
-                </div>
                   <p className="pull-right">
                       <input type="submit" value="Save" className="waves-effect waves-light btn" />
                  </p>
-              </div>
           </form>
+        </div>
     );
   }
 }

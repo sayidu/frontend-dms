@@ -1,12 +1,6 @@
 import axios from 'axios';
 
 
-const AUTH_TOKEN = localStorage.getItem('loginToken');
-
-const config = {
-  headers: {'Authorization': AUTH_TOKEN}
-};
-
 export function saveADoc(doc) {
   return {
     type:'SAVE_NEW_DOC',
@@ -16,11 +10,25 @@ export function saveADoc(doc) {
 
 export function saveDoc(doc) {
   return dispatch => {
-    console.log("Document dispatched", doc, config);
-     return axios.post('/documents', doc, config)
+   return axios.post('/documents', doc)
       .then((res) => {
         dispatch(saveADoc(doc));
-        console.log('db document created');
+      })
+  }
+}
+
+export function viewDocs(docs) {
+  return {
+    type:'VIEW_DOCS',
+    docs
+  }
+}
+
+export function viewDocuments() {
+  return dispatch => {
+     return axios.get('/documents')
+      .then((res) => {
+          dispatch(viewDocs(res.data.docs));
       })
   }
 }

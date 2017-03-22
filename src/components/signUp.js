@@ -15,7 +15,7 @@ class SignUp extends React.Component {
         userState: true,
         createdAt: new Date(),
         updatedAt: new Date(),
-        roleId: 1
+        roleId: 2
       }
   }
 
@@ -45,12 +45,13 @@ class SignUp extends React.Component {
                    <input placeholder="Email" name="email"  onChange={this.handleChange} required   type="email" className="validate"/>
               </div>
               <div className="input-field col s10">
-                   <i className="material-icons prefix">lock</i>
+                    <i className="material-icons">lock</i>
                    <input placeholder="Password" name="password" onChange={this.handleChange}  required type="password" className="validate"/>
+              </div>
                   <p>
                       <input type="submit" value="Sign Up" className="waves-effect waves-light btn" />
                  </p>
-              </div>
+
          </form>
     );
   }
